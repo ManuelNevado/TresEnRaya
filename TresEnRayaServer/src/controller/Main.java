@@ -12,13 +12,14 @@ public class Main {
 		server.accept();
 		//Se queda parado hasta que acepta a los dos
 		while(!board.end()) {
-			
+			server.alive(true);
 			//Movimiento jugador 1
 			Pair c1 = server.askP1();
 			if(board.numberOfX()==3) {
+				server.sendDelete("p1",true);
 				Pair d1 = server.askP1();
 				board.delete(d1);
-			}
+			}else server.sendDelete("p1",false);
 			board.placeX(c1);
 			server.sendBoard(); //Enviamos el tablero
 			
@@ -26,12 +27,14 @@ public class Main {
 			if(!board.end()) {
 				Pair c2 = server.askP2();
 				if(board.numberOfY()==3) {
+					server.sendDelete("p2",true);
 					Pair d1 = server.askP2();
 					board.delete(d1);
-				}
+				}else server.sendDelete("p2",false);
 				board.placeY(c2);
 				server.sendBoard(); //Emviamos el tablero
 			}
+			server.alive(false);
 			
 		}
 	}

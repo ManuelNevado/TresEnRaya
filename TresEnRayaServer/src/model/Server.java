@@ -102,4 +102,45 @@ public class Server {
 		
 	}
 	
+	public void alive(boolean alive) {
+		try {
+			OutputStream outstream1 = p1.getOutputStream();
+			OutputStream outstream2 = p1.getOutputStream();
+			
+			PrintWriter out1 = new PrintWriter(outstream1);
+			PrintWriter out2 = new PrintWriter(outstream2);
+			if(alive) {
+				out1.write("ok");
+				out2.write("ok");
+			}else {
+				out1.write(":(");
+				out2.write(":(");
+			}
+			
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void sendDelete(String player,boolean p) {
+		try {
+			OutputStream outstream1 = p1.getOutputStream();
+			OutputStream outstream2 = p1.getOutputStream();
+			
+			PrintWriter out1 = new PrintWriter(outstream1);
+			PrintWriter out2 = new PrintWriter(outstream2);
+			if(player.contentEquals("p1")) {
+				if(p) out1.write("delete");
+				else out1.write("chill");
+			}
+			else {
+				if(p) out2.write("delete");
+				else out2.write("chill");
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
